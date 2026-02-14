@@ -1,3 +1,106 @@
-export default function Application() {
-  return <div>home page</div>;
+import { useAuthRoutes } from "@/api/auth/useAuth";
+import { Logo } from "@/components/logo/logo";
+import { Typography } from "@/components/typography/typography";
+import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/ui/navbar";
+import PageBase from "@/components/ui/page-base";
+import { useUserStore } from "@/stores/useUserStore";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+
+export default function Home() {
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const navigate = useNavigate();
+
+  const setUser = useUserStore((state) => state.setUser);
+  const { authCallback } = useAuthRoutes();
+
+  const authCallbackMutation = useMutation({
+    mutationKey: ["auth-callback-mutation"],
+    mutationFn: () => authCallback(),
+    onSuccess: (data) => {
+      if (data) {
+        console.log("hi :)");
+        setUser({ name: data?.name, email: data?.email, id: data.id });
+        navigate("board");
+      }
+    },
+    onError: () => {
+      // todo: notification user does not exist
+      console.log("fuck");
+      logout();
+      navigate("error");
+    },
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) authCallbackMutation.mutate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]);
+
+  return (
+    <PageBase>
+      <Navbar />
+      <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+        <Logo color="full" size={"lg"} />
+        <div className="flex flex-row gap-16 border p-16 rounded-2xl ">
+          <div className="flex flex-col gap-0.5 ">
+            <Typography variant="h1" className="text-7xl! text">
+              ORGANIZE
+            </Typography>
+            <Typography variant="h1" className="text-7xl! ">
+              YOUR
+            </Typography>
+            <Typography variant="h1" className="text-7xl! ">
+              JOB
+            </Typography>
+            <Typography variant="h1" className="text-7xl! ">
+              SEARCH.
+            </Typography>
+          </div>
+          <div className="flex flex-col gap-6 justify-center ">
+            <div className="w-70">
+              <Typography className="text-3xl ">
+                Track applications, deadlines, and interviews all in one
+                dashboard.
+              </Typography>
+            </div>
+            <Typography variant="h2" className="text-3xl font-extrabold">
+              Stay on top
+            </Typography>
+            <div className="flex justify-center gap-4">
+              <Button size={"lg"} onClick={() => loginWithRedirect()}>
+                Get started!
+              </Button>
+              <Button
+                size={"lg"}
+                variant={"ghost"}
+                onClick={() =>
+                  window.open(
+                    "https://github.com/victor-neutzling/recruitflow-frontend",
+                    "_blank",
+                  )
+                }
+              >
+                source code
+              </Button>
+            </div>
+          </div>
+        </div>
+        <Typography variant="muted" className="mt-16">
+          © 2026 Recruitflow. All rights reserved.
+        </Typography>
+        <Typography variant="muted">
+          Built by job seekers, for job seekers.
+        </Typography>
+      </div>
+    </PageBase>
+  );
 }
+
+//#005F02
+//#427A43
+//#C0B87A
+//#F2E3BB

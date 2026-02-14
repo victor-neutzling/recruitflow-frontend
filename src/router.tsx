@@ -30,11 +30,9 @@ export const router = createBrowserRouter([
   {
     path: "/board",
     element: <ProtectedBoard />,
-    children: [
-      {
-        path: "application",
-        element: <ProtectedApplication />,
-      },
-    ],
+  },
+  {
+    path: "/board/application",
+    element: <ProtectedApplication />,
   },
 ]);
