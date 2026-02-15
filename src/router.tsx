@@ -1,5 +1,5 @@
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import React, { lazy, type ComponentType } from "react";
+import { lazy, type ComponentType } from "react";
 import { createBrowserRouter } from "react-router";
 
 const Home = lazy(() => import("./pages/home"));

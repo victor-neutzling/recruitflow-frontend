@@ -22,21 +22,22 @@ export default function Home() {
     mutationFn: () => authCallback(),
     onSuccess: (data) => {
       if (data) {
-        console.log("hi :)");
         setUser({ name: data?.name, email: data?.email, id: data.id });
-        navigate("board");
+        navigate("/board");
       }
     },
     onError: () => {
       // todo: notification user does not exist
-      console.log("fuck");
+      console.log("wth");
       logout();
-      navigate("error");
+      navigate("/error");
     },
   });
 
   useEffect(() => {
-    if (isAuthenticated) authCallbackMutation.mutate();
+    if (isAuthenticated) {
+      authCallbackMutation.mutate();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
@@ -53,7 +54,7 @@ export default function Home() {
             <Typography variant="h1" className="text-7xl! ">
               YOUR
             </Typography>
-            <Typography variant="h1" className="text-7xl! ">
+            <Typography variant="h1" className="text-7xl! ml-2.5">
               JOB
             </Typography>
             <Typography variant="h1" className="text-7xl! ">
