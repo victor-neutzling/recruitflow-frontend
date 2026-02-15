@@ -114,6 +114,23 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@theme {
+  --color-primary: rgb(47 111 94);
+  --color-primary-dark: rgb(37 79 68);
+  --color-accent: rgb(44 194 111);
+
+  --color-background: rgb(246 247 246);
+  --color-surface: rgb(255 255 255);
+  --color-border: rgb(229 231 235);
+
+  --color-text-primary: rgb(31 41 51);
+  --color-text-secondary: rgb(75 85 99);
+  --color-muted: rgb(156 163 175);
+
+  --color-cta: rgb(47 111 94);
+  --color-cta-hover: rgb(40 94 82);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -122,5 +139,12 @@
   body {
     @apply bg-background text-foreground;
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes heroEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

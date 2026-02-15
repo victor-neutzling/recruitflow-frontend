@@ -1,15 +1,25 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { Logo } from "../logo/logo";
 import { Button } from "./button";
+import { useNavigate } from "react-router";
 
-export function Navbar() {
+type NavbarProps = {
+  children?: React.ReactNode;
+};
+
+export function Navbar({ children }: NavbarProps) {
+  const { isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
   return (
-    <div className="w-full h-16 border-b-1 flex flex-row justify-between px-4 py-4">
-      <Button variant={"ghost"} className="cursor-pointer">
-        <Logo color="black" size="sm" />
+    <div className="w-full h-16 flex justify-between px-4 py-4 bg-[#FFFFFF] shadow-md">
+      <Button
+        variant={"ghost"}
+        onClick={() => navigate(isAuthenticated ? "/" : "/board")}
+      >
+        <Logo color="full" size="sm" />
       </Button>
-      <Button size={"sm"} variant={"ghost"} className="cursor-pointer">
-        Login
-      </Button>
+      {children}
     </div>
   );
 }

@@ -6,7 +6,7 @@ type PageBaseProps = {
 
 export default function PageBase({ children }: PageBaseProps) {
   return (
-    <div className="min-h-screen w-full flex">
+    <div className="min-h-screen w-full flex bg-[#F6F7F6]">
       <div className="flex-1 flex flex-col">{children}</div>
     </div>
   );

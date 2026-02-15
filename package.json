@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.14.0",
+    "@dnd-kit/helpers": "^0.2.4",
+    "@dnd-kit/react": "^0.2.4",
+    "@dnd-kit/sortable": "^10.0.0",
     "@fontsource-variable/noto-sans": "^5.2.10",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^5.90.21",

@@ -9,11 +9,11 @@ type TypographyProps = React.HTMLAttributes<HTMLElement> & {
 };
 
 const variantStyles: Record<Variant, string> = {
-  h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
-  h2: "scroll-m-20 text-3xl font-semibold tracking-tight",
-  h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
-  p: "leading-7 [&:not(:first-child)]:mt-6",
-  muted: "text-sm text-muted-foreground",
+  h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-text-primary",
+  h2: "scroll-m-20 text-3xl font-semibold tracking-tight text-text-primary",
+  h3: "scroll-m-20 text-2xl font-semibold tracking-tight text-text-primary",
+  p: "leading-7 [&:not(:first-child)]:mt-6 text-text-primary",
+  muted: "text-sm text-muted",
 };
 
 const defaultElement: Record<Variant, React.ElementType> = {
