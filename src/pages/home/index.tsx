@@ -9,12 +9,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export default function Home() {
   const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
 
-  const setUser = useUserStore((state) => state.setUser);
+  const { setUser } = useUserStore();
   const { authCallback } = useAuthRoutes();
 
   const authCallbackMutation = useMutation({
@@ -23,12 +24,12 @@ export default function Home() {
     onSuccess: (data) => {
       if (data) {
         setUser({ name: data?.name, email: data?.email, id: data.id });
+        console.log(data);
         navigate("/board");
       }
     },
     onError: () => {
-      // todo: notification user does not exist
-      console.log("wth");
+      toast("User does not exist.");
       logout();
       navigate("/error");
     },

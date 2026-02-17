@@ -4,6 +4,7 @@ import { queryClient } from "./lib/react-query";
 import { RouterProvider } from "react-router";
 
 import { router } from "./router";
+import { Toaster } from "./components/ui/sonner";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         useRefreshTokens={true}
       >
         <RouterProvider router={router} />
+        <Toaster />
       </Auth0Provider>
     </QueryClientProvider>
   );

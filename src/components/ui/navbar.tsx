@@ -12,7 +12,7 @@ export function Navbar({ children }: NavbarProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-16 flex justify-between px-4 py-4 bg-[#FFFFFF] shadow-md">
+    <div className="w-full h-16 flex justify-between px-4 py-4 bg-[#FFFFFF] z-999 shadow-md fixed!">
       <Button
         variant={"ghost"}
         onClick={() => navigate(isAuthenticated ? "/" : "/board")}

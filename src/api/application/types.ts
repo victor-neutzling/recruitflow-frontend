@@ -5,14 +5,20 @@ export type Application = {
   companyName: string | null;
   appliedAt: string | null;
   columnIndex: number;
-  status: "applied" | "reply" | "interview" | "offer" | "rejected" | "accepted";
+  status:
+    | "applied"
+    | "interview"
+    | "inProgress"
+    | "offer"
+    | "rejected"
+    | "accepted";
 };
 
 // Grouped applications type
 export type GetApplicationsResponse = {
   applied: Application[];
-  reply: Application[];
   interview: Application[];
+  inProgress: Application[];
   offer: Application[];
   rejected: Application[];
   accepted: Application[];
@@ -20,6 +26,12 @@ export type GetApplicationsResponse = {
 
 export type MoveApplicationsPayload = {
   id: string;
-  status: "applied" | "reply" | "interview" | "offer" | "rejected" | "accepted";
+  status:
+    | "applied"
+    | "interview"
+    | "inProgress"
+    | "offer"
+    | "rejected"
+    | "accepted";
   columnIndex: number;
 }[];

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -125,10 +127,17 @@
 
   --color-text-primary: rgb(31 41 51);
   --color-text-secondary: rgb(75 85 99);
-  --color-muted: rgb(156 163 175);
+  --color-muted: rgb(126 133 145);
 
   --color-cta: rgb(47 111 94);
   --color-cta-hover: rgb(40 94 82);
+
+  --color-applied: rgb(100, 116, 139);
+  --color-interview: rgb(245, 158, 11);
+  --color-inprogress: rgb(59, 130, 246);
+  --color-offer: rgb(139, 92, 246);
+  --color-rejected: rgb(220, 107, 107);
+  --color-accepted: rgb(22, 163, 74);
 }
 
 @layer base {
@@ -137,6 +146,7 @@
     @apply border-border outline-ring/50;
   }
   body {
+    font-family: "Noto Sans";
     @apply bg-background text-foreground;
     @apply bg-background text-foreground;
   }

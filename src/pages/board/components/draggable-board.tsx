@@ -29,40 +29,38 @@ export function DraggableBoard() {
   });
 
   useEffect(() => {
-    if (applicationsQuery.isSuccess) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setApplications(applicationsQuery.data);
-    }
-  }, [applicationsQuery.isSuccess]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (applicationsQuery.data) setApplications(applicationsQuery.data);
+  }, [applicationsQuery.data]);
 
   return (
-    <div className="flex flex-row gap-4 w-full bg-red-400">
-      <DragDropProvider
-        onDragEnd={(event) => {
-          setApplications((applications) => move(applications, event));
-          moveApplicationsMutation.mutate(
-            mapApplicationsToPayload(move(applications, event)),
-          );
-        }}
-      >
+    <DragDropProvider
+      onDragOver={(event) => {
+        setApplications((applications) => move(applications, event));
+      }}
+      onDragEnd={(event) => {
+        setApplications((applications) => move(applications, event));
+        moveApplicationsMutation.mutate(
+          mapApplicationsToPayload(move(applications, event)),
+        );
+      }}
+    >
+      <div className="flex flex-row gap-4 w-full min-h-full pt-20 pb-4 bg-background justify-center">
         {Object.entries(applications).map(([column, applications]) => (
           <Column key={column} id={column}>
-            {applications.map((application) => (
+            {applications.map((application, index) => (
               <DraggableCard
                 key={application.id}
                 id={application.id}
-                index={application.columnIndex}
-                column={application.status}
-                cardData={{
-                  name: application.title,
-                  stuff:
-                    application.position + " at " + application.companyName,
-                }}
+                index={index}
+                column={column}
+                cardData={application}
+                refetch={applicationsQuery.refetch}
               />
             ))}
           </Column>
         ))}
-      </DragDropProvider>
-    </div>
+      </div>
+    </DragDropProvider>
   );
 }
