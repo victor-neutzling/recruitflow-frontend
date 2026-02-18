@@ -1,5 +1,4 @@
 import type { Application } from "@/api/application/types";
-import { useApplicationRoutes } from "@/api/application/useApplication";
 import { Typography } from "@/components/typography/typography";
 
 import { Button } from "@/components/ui/button";
@@ -60,12 +59,8 @@ export function DraggableCard({
             <CardTitle className="ml-2 pt-1.5 text-sm">
               {cardData.title}
             </CardTitle>
-            <PopoverTrigger onClick={(e) => e.stopPropagation()}>
-              <Button
-                variant={"ghost"}
-                className="w-8 h-8 rounded-lg m-0"
-                asTrigger
-              >
+            <PopoverTrigger onClick={(e) => e.stopPropagation()} asChild>
+              <Button variant={"ghost"} className="w-8 h-8 rounded-lg m-0">
                 <EllipsisVertical size={16} className="text-text-secondary" />
               </Button>
             </PopoverTrigger>

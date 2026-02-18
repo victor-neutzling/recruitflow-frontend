@@ -29,7 +29,6 @@ type CreateApplicationModalProps = {
 
 export function CreateApplicationModal({
   columnLength,
-
   setOpen,
 }: CreateApplicationModalProps) {
   const form = useForm<ApplicationFormData>({

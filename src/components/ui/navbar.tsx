@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import {
   Popover,
   PopoverContent,
-  PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
 } from "./popover";
@@ -33,8 +32,8 @@ export function Navbar({ children }: NavbarProps) {
         {children}
         {isAuthenticated && (
           <Popover>
-            <PopoverTrigger>
-              <Button variant={"secondary"} asTrigger>
+            <PopoverTrigger asChild>
+              <Button variant={"secondary"}>
                 <User />
               </Button>
             </PopoverTrigger>
@@ -46,7 +45,7 @@ export function Navbar({ children }: NavbarProps) {
                 </div>
               </PopoverTitle>
 
-              <Button className="w-full" onClick={() => logout()} asTrigger>
+              <Button className="w-full" onClick={() => logout()}>
                 Logout
               </Button>
             </PopoverContent>

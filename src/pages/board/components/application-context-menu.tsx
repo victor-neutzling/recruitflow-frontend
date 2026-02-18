@@ -65,12 +65,11 @@ export function ApplicationContextMenu({
           <Pencil /> Edit
         </Button>
         <AlertDialog>
-          <AlertDialogTrigger>
+          <AlertDialogTrigger asChild>
             <Button
               variant={"ghost"}
               size={"sm"}
               className="w-full justify-start gap-2 text-destructive"
-              asTrigger
             >
               <Trash /> Delete
             </Button>
