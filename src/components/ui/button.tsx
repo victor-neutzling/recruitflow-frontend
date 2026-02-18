@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "radix-ui";
+import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-[#285E52] bg-[#2F6F5E] ",
+          "bg-primary text-primary-foreground hover:bg-[#285E52] bg-[#2F6F5E]",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -38,19 +38,27 @@ const buttonVariants = cva(
   },
 );
 
+type ButtonProps = React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+    asTrigger?: boolean;
+  };
+
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  asTrigger = false,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot.Root : "button";
+}: ButtonProps) {
+  const Comp = asChild ? Slot : "button";
 
-  return (
+  return asTrigger ? (
+    <div className={cn(buttonVariants({ variant, size, className }))}>
+      {props.children}
+    </div>
+  ) : (
     <Comp
       data-slot="button"
       data-variant={variant}

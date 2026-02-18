@@ -5,13 +5,19 @@ import { CirclePlus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mapStatusNames } from "@/utils/map-status-names";
 import { statusColorMap } from "@/utils/status-color-map";
+import { Dialog } from "@/components/ui/dialog";
+import { CreateApplicationModal } from "./create-application-modal";
+import { useState } from "react";
 
 type ColumnProps = {
   children: React.ReactNode;
   id: string;
+  columnLength: number;
 };
 
-export function Column({ children, id }: ColumnProps) {
+export function Column({ children, id, columnLength }: ColumnProps) {
+  const [open, setOpen] = useState(false);
+
   const { ref } = useDroppable({
     id,
     type: "column",
@@ -31,17 +37,30 @@ export function Column({ children, id }: ColumnProps) {
             {mapStatusNames[id]}
           </Typography>
         </div>
-        <Button variant={"ghost"} className="w-8 h-8 rounded-lg m-0">
+
+        <Button
+          variant={"ghost"}
+          className="w-8 h-8 rounded-lg m-0"
+          onClick={() => setOpen(true)}
+        >
           <CirclePlus size={16} className="text-text-secondary" />
         </Button>
       </div>
       <div ref={ref} className="flex! flex-col gap-2  w-60 min-h-12">
         {children}
       </div>
-      <Button className="w-60" size={"sm"}>
+
+      <Button className="w-60" size={"sm"} onClick={() => setOpen(true)}>
         <Plus color="#FFFFFF" />
         Add new application
       </Button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <CreateApplicationModal
+          columnLength={columnLength}
+          setOpen={(value: boolean) => setOpen(value)}
+        />
+      </Dialog>
     </div>
   );
 }

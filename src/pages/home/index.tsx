@@ -47,7 +47,7 @@ export default function Home() {
       <Navbar>
         <Button
           size={"sm"}
-          variant={"ghost"}
+          variant={"link"}
           onClick={() => loginWithRedirect()}
         >
           login

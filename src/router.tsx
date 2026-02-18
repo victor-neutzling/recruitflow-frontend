@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
     element: <ProtectedBoard />,
   },
   {
-    path: "/board/application",
+    path: "/application/:mode/:id?",
     element: <ProtectedApplication />,
   },
 ]);

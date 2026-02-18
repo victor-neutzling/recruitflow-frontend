@@ -47,7 +47,7 @@ export function DraggableBoard() {
     >
       <div className="flex flex-row gap-4 w-full min-h-full pt-20 pb-4 bg-background justify-center">
         {Object.entries(applications).map(([column, applications]) => (
-          <Column key={column} id={column}>
+          <Column key={column} id={column} columnLength={applications.length}>
             {applications.map((application, index) => (
               <DraggableCard
                 key={application.id}

@@ -2,24 +2,57 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Logo } from "../logo/logo";
 import { Button } from "./button";
 import { useNavigate } from "react-router";
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "./popover";
+import { User } from "lucide-react";
+import { useUserStore } from "@/stores/useUserStore";
 
 type NavbarProps = {
   children?: React.ReactNode;
 };
 
 export function Navbar({ children }: NavbarProps) {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
+  const { user } = useUserStore();
 
   return (
     <div className="w-full h-16 flex justify-between px-4 py-4 bg-[#FFFFFF] z-999 shadow-md fixed!">
       <Button
         variant={"ghost"}
-        onClick={() => navigate(isAuthenticated ? "/" : "/board")}
+        onClick={() => navigate(isAuthenticated ? "/Board" : "/")}
       >
         <Logo color="full" size="sm" />
       </Button>
-      {children}
+      <div className="flex gap-4">
+        {children}
+        {isAuthenticated && (
+          <Popover>
+            <PopoverTrigger>
+              <Button variant={"secondary"} asTrigger>
+                <User />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="flex flex-col mt-4 mr-1 capitalize gap-4">
+              <PopoverTitle>
+                <div className="flex gap-4 items-center">
+                  <User size={20} />
+                  Hello, {user?.name.split(" ")[0]}!
+                </div>
+              </PopoverTitle>
+
+              <Button className="w-full" onClick={() => logout()} asTrigger>
+                Logout
+              </Button>
+            </PopoverContent>
+          </Popover>
+        )}
+      </div>
     </div>
   );
 }
