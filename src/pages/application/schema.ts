@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const applicationFormSchema = z.object({
-  title: z.string(),
+  title: z.string().optional(),
   companyName: z.string(),
-  position: z.string().optional(),
+  position: z.string(),
   salary: z.number().optional(),
   salaryType: z.enum(["expected", "offered"]).optional(),
   currency: z.string().optional(),

@@ -16,12 +16,15 @@ export type Application = {
 
 // Grouped applications type
 export type GetApplicationsResponse = {
-  applied: Application[];
-  interview: Application[];
-  inProgress: Application[];
-  offer: Application[];
-  rejected: Application[];
-  accepted: Application[];
+  applications: {
+    applied: Application[];
+    interview: Application[];
+    inProgress: Application[];
+    offer: Application[];
+    rejected: Application[];
+    accepted: Application[];
+  };
+  total: number;
 };
 
 export type MoveApplicationsPayload = {
@@ -35,3 +38,18 @@ export type MoveApplicationsPayload = {
     | "accepted";
   columnIndex: number;
 }[];
+
+export type CreateApplicationPayload = {
+  title: string;
+  position: string;
+  companyName?: string;
+  appliedAt?: string;
+  columnIndex: number;
+  status:
+    | "applied"
+    | "interview"
+    | "inProgress"
+    | "offer"
+    | "rejected"
+    | "accepted";
+};

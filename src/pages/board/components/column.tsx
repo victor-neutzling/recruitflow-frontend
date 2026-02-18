@@ -8,6 +8,7 @@ import { statusColorMap } from "@/utils/status-color-map";
 import { Dialog } from "@/components/ui/dialog";
 import { CreateApplicationModal } from "./create-application-modal";
 import { useState } from "react";
+import type { Application } from "@/api/application/types";
 
 type ColumnProps = {
   children: React.ReactNode;
@@ -58,6 +59,7 @@ export function Column({ children, id, columnLength }: ColumnProps) {
       <Dialog open={open} onOpenChange={setOpen}>
         <CreateApplicationModal
           columnLength={columnLength}
+          columnName={id as Application["status"]}
           setOpen={(value: boolean) => setOpen(value)}
         />
       </Dialog>

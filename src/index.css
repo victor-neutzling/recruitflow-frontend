@@ -119,6 +119,7 @@
 @theme {
   --color-primary: rgb(47 111 94);
   --color-primary-dark: rgb(37 79 68);
+  --color-primary-focus: rgb(102 148 138);
   --color-accent: rgb(44 194 111);
 
   --color-background: rgb(246 247 246);

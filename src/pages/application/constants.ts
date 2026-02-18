@@ -1,7 +1,7 @@
 export const APPLICATION_FORM_INITIAL_VALUES = {
   title: "",
   companyName: "",
-  position: undefined,
+  position: "",
   salary: undefined,
   salaryType: undefined,
   currency: undefined,

@@ -4,11 +4,13 @@ import type {
 } from "@/api/application/types";
 
 export function mapApplicationsToPayload(
-  data: GetApplicationsResponse,
+  data: GetApplicationsResponse["applications"],
 ): MoveApplicationsPayload {
   const payload: MoveApplicationsPayload = [];
 
-  for (const status of Object.keys(data) as (keyof GetApplicationsResponse)[]) {
+  for (const status of Object.keys(
+    data,
+  ) as (keyof GetApplicationsResponse["applications"])[]) {
     const applications = data[status];
 
     applications.forEach((app, index) => {
