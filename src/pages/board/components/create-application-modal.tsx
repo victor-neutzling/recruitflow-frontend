@@ -84,9 +84,9 @@ export function CreateApplicationModal({
   }
 
   function handleClose() {
-    setOpen(false);
     form.reset();
     form.clearErrors();
+    setOpen(false);
   }
 
   return (
@@ -160,7 +160,7 @@ export function CreateApplicationModal({
           </Field>
         </FieldGroup>
         <DialogFooter className="pt-4">
-          <Button variant={"outline"} onClick={handleClose}>
+          <Button variant={"outline"} type="button" onClick={handleClose}>
             Cancel
           </Button>
           <Button type="submit" disabled={createApplicationMutation.isPending}>

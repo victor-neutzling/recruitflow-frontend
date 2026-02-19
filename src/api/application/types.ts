@@ -53,3 +53,30 @@ export type CreateApplicationPayload = {
     | "rejected"
     | "accepted";
 };
+
+export type GetApplicationByIdResponse = {
+  id: string;
+  title: string;
+  companyName: string;
+  position: string | null;
+  salary: number | null;
+  salaryType: "expected" | "offered" | null;
+  currency: string | null;
+  workModel: "remote" | "hybrid" | "onsite" | null;
+  regime: "clt" | "pj" | "other" | null;
+  description: string | null;
+  status:
+    | "applied"
+    | "interview"
+    | "inProgress"
+    | "offer"
+    | "rejected"
+    | "accepted";
+  columnIndex: number;
+  appliedAt: string | null;
+  applicationLinks: {
+    id: string;
+    label: string | null;
+    url: string;
+  }[];
+};
