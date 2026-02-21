@@ -5,7 +5,7 @@ import { PopoverContent } from "@/components/ui/popover";
 import { BookOpen, Pencil, Trash } from "lucide-react";
 
 import { useNavigate } from "react-router";
-import { ConfirmDeleteModal } from "./confirm-delete-modal";
+import { ConfirmDeleteModal } from "../../../components/ui/confirm-delete-modal";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useApplicationRoutes } from "@/api/application/useApplication";
@@ -74,9 +74,7 @@ export function ApplicationContextMenu({
               <Trash /> Delete
             </Button>
           </AlertDialogTrigger>
-          <ConfirmDeleteModal
-            handleDeleteApplication={handleDeleteApplication}
-          />
+          <ConfirmDeleteModal handleDelete={handleDeleteApplication} />
         </AlertDialog>
       </div>
     </PopoverContent>

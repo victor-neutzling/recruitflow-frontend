@@ -35,7 +35,7 @@ export function Description({
         {isReadMoreEnabled ? (
           <>
             <Typography className="text-sm">{description}</Typography>
-            <div className="w-full border-b" />
+            <div className="w-full border-b mt-2" />
             <Button variant="link" onClick={() => setIsReadMoreEnabled(false)}>
               read less
             </Button>
@@ -45,7 +45,7 @@ export function Description({
             <Typography className="text-sm">
               {description.slice(0, limit) + "..."}
             </Typography>
-            <div className="w-full border-b" />
+            <div className="w-full border-b mt-2" />
             <Button variant="link" onClick={() => setIsReadMoreEnabled(true)}>
               read more
             </Button>

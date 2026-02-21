@@ -9,16 +9,14 @@ import {
   PopoverTrigger,
 } from "./popover";
 import { User } from "lucide-react";
-import { useUserStore } from "@/stores/useUserStore";
 
 type NavbarProps = {
   children?: React.ReactNode;
 };
 
 export function Navbar({ children }: NavbarProps) {
-  const { isAuthenticated, logout } = useAuth0();
+  const { user, isAuthenticated, logout } = useAuth0();
   const navigate = useNavigate();
-  const { user } = useUserStore();
 
   return (
     <div className="w-full h-16 flex justify-between px-4 py-4 bg-[#FFFFFF] z-999 shadow-md fixed!">
@@ -41,7 +39,7 @@ export function Navbar({ children }: NavbarProps) {
               <PopoverTitle>
                 <div className="flex gap-4 items-center">
                   <User size={20} />
-                  Hello, {user?.name.split(" ")[0]}!
+                  Hello, {user?.name?.split(" ")[0]}!
                 </div>
               </PopoverTitle>
 

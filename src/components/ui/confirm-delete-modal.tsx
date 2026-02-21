@@ -9,25 +9,25 @@ import {
 } from "@/components/ui/alert-dialog";
 
 type ConfirmDeleteModalProps = {
-  handleDeleteApplication: () => void;
+  handleDelete: () => void;
+  customText?: string;
 };
 
 export function ConfirmDeleteModal({
-  handleDeleteApplication,
+  handleDelete,
+  customText = "Are you sure you want to delete this application?",
 }: ConfirmDeleteModalProps) {
   return (
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>
-          Are you sure you want to delete this application?
-        </AlertDialogTitle>
+        <AlertDialogTitle>{customText}</AlertDialogTitle>
         <AlertDialogDescription>
           this action cannot be undone.
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction onClick={handleDeleteApplication}>
+        <AlertDialogAction variant={"destructive"} onClick={handleDelete}>
           Continue
         </AlertDialogAction>
       </AlertDialogFooter>

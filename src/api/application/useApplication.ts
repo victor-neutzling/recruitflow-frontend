@@ -3,6 +3,7 @@ import { useApi } from "../infra/useApi";
 import type {
   Application,
   CreateApplicationPayload,
+  EditApplicationPayload,
   GetApplicationByIdResponse,
   GetApplicationsResponse,
   MoveApplicationsPayload,
@@ -37,11 +38,35 @@ export const useApplicationRoutes = () => {
     return response.data;
   };
 
+  const editApplication = async (
+    applicationId?: string,
+    data?: EditApplicationPayload,
+  ) => {
+    if (!applicationId) throwParameterError("applicationId");
+    if (!data) throwParameterError("data");
+    const response = await api.put<
+      EditApplicationPayload,
+      AxiosResponse<Application>
+    >(`/applications/${applicationId}`, data);
+
+    return response.data;
+  };
+
   const moveApplications = async (data: MoveApplicationsPayload) => {
     const response = await api.patch<
       MoveApplicationsPayload,
       AxiosResponse<void>
     >("/applications", data);
+
+    return response.data;
+  };
+
+  const moveApplicationForward = async (id?: string) => {
+    if (!id) throwParameterError("id");
+
+    const response = await api.patch<void, AxiosResponse<Application>>(
+      `/applications/moveforward/${id}`,
+    );
 
     return response.data;
   };
@@ -57,7 +82,9 @@ export const useApplicationRoutes = () => {
     getApplications,
     getApplicationById,
     createApplication,
+    editApplication,
     moveApplications,
     deleteApplication,
+    moveApplicationForward,
   };
 };

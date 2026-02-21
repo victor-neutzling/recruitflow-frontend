@@ -54,6 +54,27 @@ export type CreateApplicationPayload = {
     | "accepted";
 };
 
+export type EditApplicationPayload = {
+  companyName: string;
+  position: string;
+  title?: string;
+  salary?: number;
+  salaryType?: "expected" | "offered";
+  currency?: string;
+  workModel?: "remote" | "hybrid" | "onsite";
+  regime?: "clt" | "pj" | "other";
+  description?: string;
+  appliedAt?: string;
+  status:
+    | "applied"
+    | "interview"
+    | "inProgress"
+    | "offer"
+    | "rejected"
+    | "accepted";
+  columnIndex: number;
+};
+
 export type GetApplicationByIdResponse = {
   id: string;
   title: string;
