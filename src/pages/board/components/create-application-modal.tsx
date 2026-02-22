@@ -23,6 +23,13 @@ import type { CreateApplicationPayload } from "@/api/application/types";
 import { useApplicationRoutes } from "@/api/application/useApplication";
 
 import { toast } from "sonner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
+import { Typography } from "@/components/typography/typography";
 
 type CreateApplicationModalProps = {
   columnLength: number;
@@ -139,11 +146,23 @@ export function CreateApplicationModal({
             />
           </Field>
           <Field>
-            <div className="flex gap-2 ">
+            <div className="flex gap-2 items-center">
               <FieldLabel className="text-text-primary font-" htmlFor="title">
                 Application label
               </FieldLabel>
+
               <FieldDescription>(Optional)</FieldDescription>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Info size={15} className="text-primary" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <Typography className="text-surface">
+                    Custom title for the card/application, if not filled, title
+                    will default to position @ company name
+                  </Typography>
+                </TooltipContent>
+              </Tooltip>
             </div>
             <Controller
               control={form.control}

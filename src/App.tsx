@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router";
 
 import { router } from "./router";
 import { Toaster } from "./components/ui/sonner";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 export default function App() {
   return (
@@ -19,7 +20,9 @@ export default function App() {
         cacheLocation="localstorage"
         useRefreshTokens={true}
       >
-        <RouterProvider router={router} />
+        <TooltipProvider>
+          <RouterProvider router={router} />
+        </TooltipProvider>
         <Toaster />
       </Auth0Provider>
     </QueryClientProvider>

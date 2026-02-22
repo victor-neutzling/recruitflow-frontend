@@ -11,6 +11,7 @@ import { Typography } from "@/components/typography/typography";
 import {
   BookOpen,
   CalendarIcon,
+  Info,
   Pencil,
   Plus,
   Send,
@@ -52,6 +53,11 @@ import {
   normalizeApplicationToForm,
 } from "../utils";
 import { EditModeSkeleton } from "../skeleton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export function EditMode() {
   const { getApplicationById, deleteApplication, editApplication } =
@@ -171,13 +177,30 @@ export function EditMode() {
               <div className="flex gap-2">
                 <FieldLabel htmlFor="title">Title</FieldLabel>
                 <FieldDescription>(Optional)</FieldDescription>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Info size={15} className="text-primary" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <Typography className="text-surface">
+                      Custom title for the card/application, if not filled,
+                      title will default to position @ company name
+                    </Typography>
+                  </TooltipContent>
+                </Tooltip>
               </div>
               <FieldError>{form.formState.errors.title?.message}</FieldError>
             </div>
             <Controller
               control={form.control}
               name="title"
-              render={({ field }) => <Input id="title" {...field} />}
+              render={({ field }) => (
+                <Input
+                  id="title"
+                  {...field}
+                  placeholder="e.g. Senior Frontend Engineer - remote"
+                />
+              )}
             />
           </Field>
           <div className="flex w-full gap-4">
@@ -192,7 +215,13 @@ export function EditMode() {
                 <Controller
                   control={form.control}
                   name="position"
-                  render={({ field }) => <Input id="position" {...field} />}
+                  render={({ field }) => (
+                    <Input
+                      id="position"
+                      {...field}
+                      placeholder="e.g. Front-end Engineer"
+                    />
+                  )}
                 />
               </Field>
             </div>
@@ -207,7 +236,13 @@ export function EditMode() {
                 <Controller
                   control={form.control}
                   name="companyName"
-                  render={({ field }) => <Input id="company" {...field} />}
+                  render={({ field }) => (
+                    <Input
+                      id="company"
+                      {...field}
+                      placeholder="e.g. XYZ Corp"
+                    />
+                  )}
                 />
               </Field>
             </div>
@@ -235,6 +270,7 @@ export function EditMode() {
                         const value = e.target.value.replace(/[^0-9.,]/g, "");
                         field.onChange(value);
                       }}
+                      placeholder="e.g. 6900.00"
                     />
                   )}
                 />
@@ -254,7 +290,9 @@ export function EditMode() {
                 <Controller
                   control={form.control}
                   name="currency"
-                  render={({ field }) => <Input id="currency" {...field} />}
+                  render={({ field }) => (
+                    <Input id="currency" {...field} placeholder="e.g. USD" />
+                  )}
                 />
               </Field>
             </div>
@@ -281,7 +319,9 @@ export function EditMode() {
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger id="salary-type">
-                          <SelectValue />
+                          <SelectValue
+                            placeholder={"Select a salary type..."}
+                          />
                         </SelectTrigger>
                         <SelectContent>
                           {CURRENCY_ITEMS.map((item) => (
@@ -314,7 +354,9 @@ export function EditMode() {
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger id="work-model">
-                        <SelectValue />
+                        <SelectValue
+                          placeholder={"Select a salary work model..."}
+                        />
                       </SelectTrigger>
                       <SelectContent>
                         {WORK_MODEL_ITEMS.map((item) => (
@@ -349,7 +391,7 @@ export function EditMode() {
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger id="regime">
-                        <SelectValue />
+                        <SelectValue placeholder={"Select a work regime..."} />
                       </SelectTrigger>
                       <SelectContent>
                         {REGIME_ITEMS.map((item) => (
@@ -406,7 +448,9 @@ export function EditMode() {
               <Controller
                 control={form.control}
                 name="description"
-                render={({ field }) => <Textarea {...field} />}
+                render={({ field }) => (
+                  <Textarea {...field} placeholder="Enter description" />
+                )}
               />
             </Field>
           </div>
@@ -431,7 +475,7 @@ export function EditMode() {
           <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-xl">
             <div className="flex pt-2 px-4 justify-between items-center">
               <Typography className="font-bold">Deadlines</Typography>
-              <Button size="xs" variant="outline">
+              <Button size="xs" variant="outline" type="button">
                 <Plus />
               </Button>
             </div>
@@ -441,7 +485,7 @@ export function EditMode() {
           <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-2xl">
             <div className="flex pt-2 px-4 justify-between items-center">
               <Typography className="font-bold">Activity</Typography>
-              <Button size="xs" variant="outline">
+              <Button size="xs" variant="outline" type="button">
                 <Plus />
               </Button>
             </div>
