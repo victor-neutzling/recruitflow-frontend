@@ -41,11 +41,11 @@ export function normalizeApplicationToForm(
     title: data.title ?? "",
     companyName: data.companyName ?? "",
     position: data.position ?? "",
-    salary: data.salary?.toString() ?? undefined,
-    salaryType: data.salaryType ?? undefined,
-    currency: data.currency ?? undefined,
-    workModel: data.workModel ?? undefined,
-    regime: data.regime ?? undefined,
+    salary: data.salary?.toString() ?? "",
+    salaryType: data.salaryType ?? "",
+    currency: data.currency ?? "",
+    workModel: data.workModel ?? "",
+    regime: data.regime ?? "",
     description: data.description ?? "",
   };
 }

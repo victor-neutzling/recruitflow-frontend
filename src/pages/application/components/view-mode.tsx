@@ -15,6 +15,7 @@ import { Pencil, Plus, Rocket, Send, Trash } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { LinksSection } from "./links-section";
+import { ViewModeSkeleton } from "../skeleton";
 
 export function ViewMode() {
   const { getApplicationById, deleteApplication, moveApplicationForward } =
@@ -28,7 +29,7 @@ export function ViewMode() {
 
   const {
     data: applicationData,
-    isPending,
+    isFetching,
     refetch: refetchApplication,
   } = useQuery({
     queryKey: ["get-application-by-id"],
@@ -61,7 +62,7 @@ export function ViewMode() {
     },
   });
 
-  if (isPending) return <div>loading</div>;
+  if (isFetching) return <ViewModeSkeleton />;
 
   return (
     <>
@@ -130,9 +131,11 @@ export function ViewMode() {
                     <Typography className="text-primary">
                       {applicationData?.currency}
                     </Typography>
-                    <Typography variant="muted" className="mb-0.5">
-                      ({applicationData?.salaryType})
-                    </Typography>
+                    {applicationData?.salaryType && (
+                      <Typography variant="muted" className="mb-0.5">
+                        ({applicationData?.salaryType})
+                      </Typography>
+                    )}
                   </div>
                 </>
               )}

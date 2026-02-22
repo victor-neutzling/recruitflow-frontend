@@ -12,6 +12,7 @@ import type {
 import { INITIAL_APPLICATIONS } from "../constants";
 import { mapApplicationsToPayload } from "../utils";
 import { Typography } from "@/components/typography/typography";
+import BoardSkeleton from "../skeleton";
 
 export function DraggableBoard() {
   const { getApplications, moveApplications } = useApplicationRoutes();
@@ -34,6 +35,8 @@ export function DraggableBoard() {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setApplications(applicationsQuery.data.applications);
   }, [applicationsQuery.data]);
+
+  if (applicationsQuery.isFetching) return <BoardSkeleton />;
 
   return (
     <div className="flex flex-col gap-16 items-center">

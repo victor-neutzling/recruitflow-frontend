@@ -51,6 +51,7 @@ import {
   normalizeApplicationFormData,
   normalizeApplicationToForm,
 } from "../utils";
+import { EditModeSkeleton } from "../skeleton";
 
 export function EditMode() {
   const { getApplicationById, deleteApplication, editApplication } =
@@ -66,7 +67,15 @@ export function EditMode() {
 
   const { data: applicationData, isFetching } = useQuery({
     queryKey: ["get-application-by-id"],
-    queryFn: () => getApplicationById(id),
+    queryFn: async () => {
+      const response = await getApplicationById(id);
+
+      form.reset(normalizeApplicationToForm(response));
+
+      if (response.appliedAt) setDate(new Date(response.appliedAt));
+
+      return response;
+    },
   });
 
   const deleteApplcationMutation = useMutation({
@@ -84,15 +93,6 @@ export function EditMode() {
   const editApplicationMutation = useMutation({
     mutationKey: ["move-application-forward"],
     mutationFn: async (data: ApplicationFormData) => {
-      console.log(
-        normalizeApplicationFormData(
-          data,
-          applicationData?.status ?? "applied",
-          applicationData?.columnIndex ?? 0,
-          date?.toISOString(),
-        ),
-      );
-
       return editApplication(
         id,
         normalizeApplicationFormData(
@@ -124,14 +124,7 @@ export function EditMode() {
     editApplicationMutation.mutate(form.getValues());
   }
 
-  useEffect(() => {
-    if (applicationData && isFetching === false) {
-      form.reset(normalizeApplicationToForm(applicationData));
-      if (applicationData.appliedAt)
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setDate(new Date(applicationData.appliedAt));
-    }
-  }, [applicationData, isFetching, form]);
+  if (isFetching) return <EditModeSkeleton />;
 
   return (
     <form
@@ -281,20 +274,25 @@ export function EditMode() {
                 <Controller
                   control={form.control}
                   name="salaryType"
-                  render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger id="salary-type">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {CURRENCY_ITEMS.map((item) => (
-                          <SelectItem key={item} value={item}>
-                            {item}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
+                  render={({ field }) => {
+                    return (
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="salary-type">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {CURRENCY_ITEMS.map((item) => (
+                            <SelectItem key={item} value={item}>
+                              {item}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    );
+                  }}
                 />
               </Field>
             </div>
