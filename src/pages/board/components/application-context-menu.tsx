@@ -6,28 +6,25 @@ import { BookOpen, Pencil, Trash } from "lucide-react";
 
 import { useNavigate } from "react-router";
 import { ConfirmDeleteModal } from "../../../components/ui/confirm-delete-modal";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useApplicationRoutes } from "@/api/application/useApplication";
 
 type ApplicationContextMenuProps = {
   id: string;
-  refetch: () => void;
 };
 
-export function ApplicationContextMenu({
-  id,
-  refetch,
-}: ApplicationContextMenuProps) {
+export function ApplicationContextMenu({ id }: ApplicationContextMenuProps) {
   const navigate = useNavigate();
   const { deleteApplication } = useApplicationRoutes();
+  const queryClient = useQueryClient();
 
   const deleteApplicationMutation = useMutation({
     mutationKey: ["delete-application"],
     mutationFn: (data: string) => deleteApplication(data),
     onSuccess: () => {
       toast("Application deleted successfully!", { position: "top-right" });
-      refetch();
+      queryClient.refetchQueries({ queryKey: ["get-applications"] });
     },
     onError: () => {
       toast("Failed to delete application, try again.");

@@ -4,7 +4,10 @@ import { createBrowserRouter } from "react-router";
 
 const Home = lazy(() => import("./pages/home"));
 const Error = lazy(() => import("./pages/error"));
+
 const Board = lazy(() => import("./pages/board"));
+const List = lazy(() => import("./pages/list"));
+
 const Application = lazy(() => import("./pages/application"));
 
 export function protectRoute<P extends object>(
@@ -14,6 +17,7 @@ export function protectRoute<P extends object>(
 }
 
 const ProtectedBoard = protectRoute(Board);
+const ProtectedList = protectRoute(List);
 const ProtectedApplication = protectRoute(Application);
 
 export const router = createBrowserRouter([
@@ -29,6 +33,10 @@ export const router = createBrowserRouter([
   {
     path: "/board",
     element: <ProtectedBoard />,
+  },
+  {
+    path: "/list",
+    element: <ProtectedList />,
   },
   {
     path: "/application/:mode/:id?",

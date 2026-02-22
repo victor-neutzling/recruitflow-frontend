@@ -19,7 +19,9 @@ export default function Application() {
       <Navbar>
         <Input placeholder="search..." type="search" />
         <Button variant={"link"}>Statistics</Button>
-        <Button variant={"link"}>List View</Button>
+        <Button variant={"link"} onClick={() => navigate("/list")}>
+          List View
+        </Button>
         <Button variant={"link"} onClick={() => navigate("/board")}>
           board
         </Button>

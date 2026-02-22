@@ -79,7 +79,7 @@ export function DraggableCard({
             </CardDescription>
           </CardContent>
         </div>
-        <ApplicationContextMenu id={id} refetch={refetch} />
+        <ApplicationContextMenu id={id} />
       </Popover>
     </div>
   );
