@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useApplicationRoutes } from "@/api/application/useApplication";
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
