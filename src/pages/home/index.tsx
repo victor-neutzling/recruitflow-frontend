@@ -128,18 +128,3 @@ export default function Home() {
     </PageBase>
   );
 }
-
-// primary:  #2F6F5E
-// Primary-dark:   #254F44
-// Accent:         #2cc26f
-
-// Background:     #F6F7F6
-// Surface/Card:   #FFFFFF
-// Border:         #E5E7EB
-
-// Text-primary:   #1F2933
-// Text-secondary: #4B5563
-// Muted:          #9CA3AF
-
-// CTA Button:     #2F6F5E
-// CTA Hover:      #285E52

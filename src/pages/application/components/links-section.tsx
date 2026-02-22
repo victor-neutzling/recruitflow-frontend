@@ -27,6 +27,7 @@ export function LinksSection({ links }: LinksSectionProps) {
           Links
         </Typography>
         <Button
+          type="button"
           variant={"outline"}
           className="rounded-full w-9"
           onClick={() => setIsCreateLinkModalOpen(true)}

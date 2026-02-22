@@ -10,9 +10,7 @@ const Application = lazy(() => import("./pages/application"));
 export function protectRoute<P extends object>(
   Component: ComponentType<P>,
 ): ComponentType<P> {
-  return withAuthenticationRequired(Component, {
-    onRedirecting: () => <div>Loading...</div>,
-  });
+  return withAuthenticationRequired(Component);
 }
 
 const ProtectedBoard = protectRoute(Board);
@@ -23,6 +21,7 @@ export const router = createBrowserRouter([
     path: "*",
     element: <Error />,
   },
+
   {
     path: "/",
     element: <Home />,

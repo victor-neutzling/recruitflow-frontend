@@ -12,12 +12,8 @@ import { statusColorMap } from "@/utils/status-color-map";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Pencil, Plus, Rocket, Send, Trash } from "lucide-react";
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
-import { CreateApplicationLinkModal } from "./create-link-modal";
-import { Dialog } from "@/components/ui/dialog";
-import { ApplicationLink } from "./application-link";
 import { LinksSection } from "./links-section";
 
 export function ViewMode() {
@@ -128,7 +124,9 @@ export function ViewMode() {
                 <>
                   <div className="flex gap-2 items-center">
                     <Typography className="font-bold">salary:</Typography>
-                    <Typography>{applicationData?.salary}</Typography>
+                    <Typography>
+                      {applicationData?.salary.toString().replace(".", ",")}
+                    </Typography>
                     <Typography className="text-primary">
                       {applicationData?.currency}
                     </Typography>

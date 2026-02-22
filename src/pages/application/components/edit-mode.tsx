@@ -84,6 +84,15 @@ export function EditMode() {
   const editApplicationMutation = useMutation({
     mutationKey: ["move-application-forward"],
     mutationFn: async (data: ApplicationFormData) => {
+      console.log(
+        normalizeApplicationFormData(
+          data,
+          applicationData?.status ?? "applied",
+          applicationData?.columnIndex ?? 0,
+          date?.toISOString(),
+        ),
+      );
+
       return editApplication(
         id,
         normalizeApplicationFormData(
@@ -137,7 +146,7 @@ export function EditMode() {
         <div className="flex gap-2">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant={"destructive"}>
+              <Button variant={"destructive"} type="button">
                 <Trash />
                 Delete
               </Button>
@@ -225,7 +234,16 @@ export function EditMode() {
                 <Controller
                   control={form.control}
                   name="salary"
-                  render={({ field }) => <Input id="salary" {...field} />}
+                  render={({ field }) => (
+                    <Input
+                      id="salary"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/[^0-9.,]/g, "");
+                        field.onChange(value);
+                      }}
+                    />
+                  )}
                 />
               </Field>
             </div>
