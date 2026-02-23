@@ -101,3 +101,7 @@ export type GetApplicationByIdResponse = {
     url: string;
   }[];
 };
+
+export type GetApplicationsParams = {
+  search?: string;
+};

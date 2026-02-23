@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Navbar } from "@/components/ui/navbar";
 import PageBase from "@/components/ui/page-base";
 import { useNavigate, useParams } from "react-router";
 
 import { ViewMode } from "./components/view-mode";
 import { EditMode } from "./components/edit-mode";
+import { Searchbar } from "@/components/ui/searchbar";
 
 export default function Application() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function Application() {
   return (
     <PageBase>
       <Navbar>
-        <Input placeholder="search..." type="search" />
+        <Searchbar />
         <Button variant={"link"}>Statistics</Button>
         <Button variant={"link"} onClick={() => navigate("/list")}>
           List View

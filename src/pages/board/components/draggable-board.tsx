@@ -61,7 +61,6 @@ export function DraggableBoard() {
                   index={index}
                   column={column}
                   cardData={application}
-                  refetch={applicationsQuery.refetch}
                 />
               ))}
             </Column>

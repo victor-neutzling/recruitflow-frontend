@@ -5,6 +5,7 @@ import type {
   CreateApplicationPayload,
   EditApplicationPayload,
   GetApplicationByIdResponse,
+  GetApplicationsParams,
   GetApplicationsResponse,
   MoveApplicationsPayload,
 } from "./types";
@@ -13,8 +14,10 @@ import { throwParameterError } from "@/utils/throw-parameter-error";
 export const useApplicationRoutes = () => {
   const api = useApi();
 
-  const getApplications = async () => {
-    const response = await api.get<GetApplicationsResponse>("/applications");
+  const getApplications = async (params?: GetApplicationsParams) => {
+    const response = await api.get<GetApplicationsResponse>("/applications", {
+      params,
+    });
 
     return response.data;
   };

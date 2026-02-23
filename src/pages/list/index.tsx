@@ -17,6 +17,7 @@ import { Dialog } from "@/components/ui/dialog";
 import { CreateApplicationModal } from "../board/components/create-application-modal";
 import type { Application } from "@/api/application/types";
 import { ListSkeleton } from "./skeleton";
+import { Searchbar } from "@/components/ui/searchbar";
 
 export default function List() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function List() {
     <PageBase>
       <Dialog open={open} onOpenChange={setOpen}>
         <Navbar>
-          <Input placeholder="search..." type="search" />
+          <Searchbar />
           <Button variant={"link"}>Statistics</Button>
           <Button variant={"link"} onClick={() => navigate("/board")}>
             Board
@@ -86,6 +87,9 @@ export default function List() {
                           >
                             <Popover>
                               <div className="flex items-center gap-2">
+                                <div
+                                  className={`w-1 h-5 ${statusColorMap[title]} rounded-full`}
+                                />
                                 <Typography variant="p">
                                   {application.title}
                                 </Typography>

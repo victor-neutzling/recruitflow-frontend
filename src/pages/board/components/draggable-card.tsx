@@ -23,16 +23,9 @@ type CardProps = {
   index: number;
   column: string;
   cardData: Application;
-  refetch: () => void;
 };
 
-export function DraggableCard({
-  id,
-  index,
-  column,
-  cardData,
-  refetch,
-}: CardProps) {
+export function DraggableCard({ id, index, column, cardData }: CardProps) {
   const navigate = useNavigate();
   const { ref, isDragging } = useSortable({
     id,
