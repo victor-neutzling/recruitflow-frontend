@@ -1,4 +1,4 @@
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { PopoverContent } from "@/components/ui/popover";

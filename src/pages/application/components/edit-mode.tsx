@@ -7,7 +7,7 @@ import {
   WORK_MODEL_ITEMS,
 } from "../constants";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import {
   BookOpen,
   CalendarIcon,

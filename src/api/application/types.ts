@@ -104,4 +104,10 @@ export type GetApplicationByIdResponse = {
 
 export type GetApplicationsParams = {
   search?: string;
+  salaryMin?: number;
+  salaryMax?: number;
+  workModel?: string;
+  regime?: string;
+  appliedFrom?: string;
+  appliedTo?: string;
 };

@@ -1,6 +1,6 @@
 import { useDroppable } from "@dnd-kit/react";
 import { CollisionPriority } from "@dnd-kit/abstract";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { CirclePlus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mapStatusNames } from "@/utils/map-status-names";

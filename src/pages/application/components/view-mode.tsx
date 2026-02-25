@@ -1,5 +1,5 @@
 import { useApplicationRoutes } from "@/api/application/useApplication";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

@@ -1,5 +1,5 @@
 import type { Application } from "@/api/application/types";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 
 import { Button } from "@/components/ui/button";
 import {

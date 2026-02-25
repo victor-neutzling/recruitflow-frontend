@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/widgets/navbar";
 import PageBase from "@/components/ui/page-base";
 import { useNavigate, useParams } from "react-router";
 
 import { ViewMode } from "./components/view-mode";
 import { EditMode } from "./components/edit-mode";
-import { Searchbar } from "@/components/ui/searchbar";
+import { Searchbar } from "@/widgets/searchbar";
 
 export default function Application() {
   const navigate = useNavigate();

@@ -1,8 +1,7 @@
 import { useApplicationRoutes } from "@/api/application/useApplication";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/widgets/navbar";
 import PageBase from "@/components/ui/page-base";
 import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { mapStatusNames } from "@/utils/map-status-names";
@@ -15,20 +14,27 @@ import { CirclePlus, EllipsisVertical } from "lucide-react";
 import { useState } from "react";
 import { Dialog } from "@/components/ui/dialog";
 import { CreateApplicationModal } from "../board/components/create-application-modal";
-import type { Application } from "@/api/application/types";
+import type {
+  Application,
+  GetApplicationsParams,
+} from "@/api/application/types";
 import { ListSkeleton } from "./skeleton";
-import { Searchbar } from "@/components/ui/searchbar";
+import { Searchbar } from "@/widgets/searchbar";
+import { Sidebar } from "@/widgets/sidebar";
+import { cleanFilters } from "@/utils/clean-filters";
 
 export default function List() {
   const navigate = useNavigate();
   const { getApplications } = useApplicationRoutes();
   const [open, setOpen] = useState(false);
 
+  const [filters, setFilters] = useState<GetApplicationsParams>({});
+
   const [dialogData, setDialogData] = useState({ title: "", sectionLength: 0 });
 
   const applicationsQuery = useQuery({
-    queryKey: ["get-applications"],
-    queryFn: () => getApplications(),
+    queryKey: ["get-applications", filters],
+    queryFn: () => getApplications(cleanFilters(filters)),
   });
 
   function handleOpenDialog(title: string, sectionLength: number) {
@@ -49,11 +55,14 @@ export default function List() {
         {applicationsQuery.isFetching ? (
           <ListSkeleton />
         ) : (
-          <div className="h-full w-full mt-16 flex justify-center">
-            <div className="max-w-350 w-full h-full p-4 mx-16 gap-4 flex flex-col bg-surface shadow-md">
-              {applicationsQuery &&
-                Object.entries(applicationsQuery.data?.applications ?? {}).map(
-                  ([title, section]) => (
+          <div className="h-full w-full flex">
+            <Sidebar filters={filters} setFilters={setFilters} />
+            <div className="h-full w-full mt-16 flex justify-center">
+              <div className="max-w-350 w-full h-full p-4 mx-16 gap-4 flex flex-col bg-surface shadow-md">
+                {applicationsQuery &&
+                  Object.entries(
+                    applicationsQuery.data?.applications ?? {},
+                  ).map(([title, section]) => (
                     <div className="w-full border rounded-2xl flex flex-col min-h-24 shadow">
                       <div className="w-full py-2 px-4 flex gap-4 items-center justify-between">
                         <div className="flex gap-4 items-center">
@@ -135,8 +144,8 @@ export default function List() {
                         </div>
                       )}
                     </div>
-                  ),
-                )}
+                  ))}
+              </div>
             </div>
           </div>
         )}

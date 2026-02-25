@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { Button } from "@/components/ui/button";
 
 interface DescriptionWithReadMoreProps {

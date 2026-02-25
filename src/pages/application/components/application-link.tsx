@@ -1,6 +1,6 @@
 import { useApplicationLinkRoutes } from "@/api/application-link/useApplicationLink";
 import type { GetApplicationByIdResponse } from "@/api/application/types";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "@/components/ui/confirm-delete-modal";

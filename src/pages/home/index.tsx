@@ -1,8 +1,8 @@
 import { useAuthRoutes } from "@/api/auth/useAuth";
-import { Logo } from "@/components/logo/logo";
-import { Typography } from "@/components/typography/typography";
+import { Logo } from "@/components/logo";
+import { Typography } from "@/components/typography";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/widgets/navbar";
 import PageBase from "@/components/ui/page-base";
 import { useUserStore } from "@/stores/useUserStore";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -24,7 +24,6 @@ export default function Home() {
     onSuccess: (data) => {
       if (data) {
         setUser({ name: data?.name, email: data?.email, id: data.id });
-        console.log(data);
         navigate("/board");
       }
     },

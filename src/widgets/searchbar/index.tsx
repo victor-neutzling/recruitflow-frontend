@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { Input } from "./input";
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { Input } from "../../components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/ui/popover";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useApplicationRoutes } from "@/api/application/useApplication";
 import { useNavigate } from "react-router";
-import { Spinner } from "./spinner";
-import { Typography } from "../typography/typography";
+import { Spinner } from "../../components/ui/spinner";
+import { Typography } from "../../components/typography";
 import { statusColorMap } from "@/utils/status-color-map";
 import { mapStatusNames } from "@/utils/map-status-names";
 import { useState } from "react";
@@ -44,7 +48,7 @@ export function Searchbar() {
         />
       </PopoverTrigger>
       <PopoverContent
-        className="mt-4 w-100 p-0"
+        className="mt-4 w-100 p-0 max-h-80 overflow-auto "
         onOpenAutoFocus={(e) => e.preventDefault()}
         onCloseAutoFocus={(e) => e.preventDefault()}
       >

@@ -1,13 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Logo } from "../logo/logo";
-import { Button } from "./button";
+import { Logo } from "@/components/logo";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router";
 import {
   Popover,
   PopoverContent,
   PopoverTitle,
   PopoverTrigger,
-} from "./popover";
+} from "@/components/ui/popover";
 import { User } from "lucide-react";
 
 type NavbarProps = {

@@ -29,7 +29,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Info } from "lucide-react";
-import { Typography } from "@/components/typography/typography";
+import { Typography } from "@/components/typography";
 
 type CreateApplicationModalProps = {
   columnLength: number;

@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/widgets/navbar";
 import PageBase from "@/components/ui/page-base";
 
 import { DraggableBoard } from "./components/draggable-board";
 import { useNavigate } from "react-router";
 
-import { Searchbar } from "@/components/ui/searchbar";
+import { Searchbar } from "@/widgets/searchbar";
 
 export default function Board() {
   const navigate = useNavigate();
