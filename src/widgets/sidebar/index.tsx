@@ -1,7 +1,6 @@
 import type { GetApplicationsParams } from "@/api/application/types";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import { Field, FieldGroup, FieldLabel } from "../../components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Typography } from "@/components/typography";
 import {
   Briefcase,
@@ -35,6 +34,7 @@ import {
 import { format, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useSidebarStore } from "@/stores/useSidebarStore";
+import { MoneyInput } from "@/components/ui/money-input";
 
 type SidebarProps = {
   filters: GetApplicationsParams;
@@ -57,8 +57,8 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
     defaultValues: {
       regime: filters.regime || "",
       workModel: filters.workModel || "",
-      salaryMin: filters.salaryMin ? filters.salaryMin.toString() : "",
-      salaryMax: filters.salaryMax ? filters.salaryMax.toString() : "",
+      salaryMin: filters.salaryMin,
+      salaryMax: filters.salaryMax,
     },
   });
   function toggleExpanded() {
@@ -66,13 +66,21 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
   }
 
   function hasAnyFilters(values: FilterFormData): boolean {
-    const anyTextFilled = Object.values(values).some(
-      (value) => typeof value === "string" && value.trim() !== "",
-    );
+    const anyValueFilled = Object.values(values).some((value) => {
+      if (typeof value === "string") {
+        return value.trim() !== "";
+      }
+
+      if (typeof value === "number") {
+        return !isNaN(value);
+      }
+
+      return false;
+    });
 
     const anyDateFilled = fromDate !== undefined || toDate !== undefined;
 
-    return anyTextFilled || anyDateFilled;
+    return anyValueFilled || anyDateFilled;
   }
 
   function handleFormReset() {
@@ -85,10 +93,8 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
     setFilters({
       regime: data.regime ?? undefined,
       workModel: data.workModel ?? undefined,
-      salaryMin:
-        parseFloat(data.salaryMin?.trim().replace(",", ".") ?? "") ?? undefined,
-      salaryMax:
-        parseFloat(data.salaryMax?.trim().replace(",", ".") ?? "") ?? undefined,
+      salaryMin: data.salaryMin ?? undefined,
+      salaryMax: data.salaryMax ?? undefined,
       appliedFrom: fromDate?.toISOString(),
       appliedTo: toDate?.toISOString(),
     });
@@ -98,10 +104,8 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
     setFilters({
       regime: data.regime ?? undefined,
       workModel: data.workModel ?? undefined,
-      salaryMin:
-        parseFloat(data.salaryMin?.trim().replace(",", ".") ?? "") ?? undefined,
-      salaryMax:
-        parseFloat(data.salaryMax?.trim().replace(",", ".") ?? "") ?? undefined,
+      salaryMin: data.salaryMin ?? undefined,
+      salaryMax: data.salaryMax ?? undefined,
       appliedFrom: fromDate?.toISOString(),
       appliedTo: toDate?.toISOString(),
     });
@@ -145,7 +149,11 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
             control={form.control}
             name="salaryMin"
             render={({ field }) => (
-              <Input {...field} id="salary-min" placeholder="e.g. 3000.00" />
+              <MoneyInput
+                {...field}
+                id="salary-min"
+                placeholder="e.g. 3000.00"
+              />
             )}
           />
         </Field>
@@ -155,7 +163,11 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
             control={form.control}
             name="salaryMax"
             render={({ field }) => (
-              <Input {...field} id="salary-max" placeholder="e.g. 9000.00" />
+              <MoneyInput
+                {...field}
+                id="salary-max"
+                placeholder="e.g. 9000.00"
+              />
             )}
           />
         </Field>
@@ -288,8 +300,8 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
           size={20}
           className={` hover:text-destructive cursor-pointer ${!(form.getValues().salaryMin || form.getValues().salaryMax) && "hidden"}`}
           onClick={() => {
-            form.setValue("salaryMax", "");
-            form.setValue("salaryMin", "");
+            form.setValue("salaryMax", undefined);
+            form.setValue("salaryMin", undefined);
             handleSubmit(form.getValues());
           }}
         />

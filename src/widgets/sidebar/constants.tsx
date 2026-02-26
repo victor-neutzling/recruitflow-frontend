@@ -1,6 +1,6 @@
 export const FILTER_FORM_INITIAL_VALUES = {
-  salaryMin: "",
-  salaryMax: "",
+  // salaryMin: "",
+  // salaryMax: "",
   workModel: "" as const,
   regime: "" as const,
 };

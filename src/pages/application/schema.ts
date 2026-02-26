@@ -5,7 +5,7 @@ export const applicationFormSchema = z
     title: z.string().optional(),
     companyName: z.string().min(1, "Company name is required"),
     position: z.string().min(1, "Position is required"),
-    salary: z.string().optional(),
+    salary: z.coerce.number<number>().optional(),
     salaryType: z.enum(["expected", "offered", ""]).optional(),
     currency: z.string().optional(),
     workModel: z.enum(["remote", "hybrid", "onsite", ""]).optional(),
@@ -13,7 +13,7 @@ export const applicationFormSchema = z
     description: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    const hasSalary = !!data.salary?.trim();
+    const hasSalary = !!data.salary;
 
     if (!hasSalary) {
       if (data.salaryType) {

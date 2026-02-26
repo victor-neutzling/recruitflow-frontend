@@ -58,6 +58,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { MoneyInput } from "@/components/ui/money-input";
 
 export function EditMode() {
   const { getApplicationById, deleteApplication, editApplication } =
@@ -135,7 +136,9 @@ export function EditMode() {
   return (
     <form
       className="flex flex-col items-center px-16 w-full"
-      onSubmit={form.handleSubmit(handleSubmit)}
+      onSubmit={form.handleSubmit(handleSubmit, (errors) => {
+        console.log(errors);
+      })}
     >
       <div className="pl-6 pr-2.5 mt-21 h-16 max-w-284 w-full bg-surface rounded-xl border shadow flex items-center justify-between">
         <Typography variant="muted">
@@ -263,13 +266,9 @@ export function EditMode() {
                   control={form.control}
                   name="salary"
                   render={({ field }) => (
-                    <Input
+                    <MoneyInput
                       id="salary"
                       {...field}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/[^0-9.,]/g, "");
-                        field.onChange(value);
-                      }}
                       placeholder="e.g. 6900.00"
                     />
                   )}
@@ -309,31 +308,39 @@ export function EditMode() {
                     {form.formState.errors.salaryType?.message}
                   </FieldError>
                 </div>
-                <Controller
-                  control={form.control}
-                  name="salaryType"
-                  render={({ field }) => {
-                    return (
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger id="salary-type">
-                          <SelectValue
-                            placeholder={"Select a salary type..."}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {CURRENCY_ITEMS.map((item) => (
-                            <SelectItem key={item} value={item}>
-                              {item}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    );
-                  }}
-                />
+                <div className="flex w-full gap-2">
+                  <Controller
+                    control={form.control}
+                    name="salaryType"
+                    render={({ field }) => {
+                      return (
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger id="salary-type" className="w-full">
+                            <SelectValue
+                              placeholder={"Select a salary type..."}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {CURRENCY_ITEMS.map((item) => (
+                              <SelectItem key={item} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      );
+                    }}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => form.setValue("salaryType", "")}
+                  >
+                    Clear
+                  </Button>
+                </div>
               </Field>
             </div>
 
@@ -348,26 +355,37 @@ export function EditMode() {
                     {form.formState.errors.workModel?.message}
                   </FieldError>
                 </div>
-                <Controller
-                  control={form.control}
-                  name="workModel"
-                  render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger id="work-model">
-                        <SelectValue
-                          placeholder={"Select a salary work model..."}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {WORK_MODEL_ITEMS.map((item) => (
-                          <SelectItem key={item.value} value={item.value}>
-                            {item.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
+                <div className="flex w-full gap-2">
+                  <Controller
+                    control={form.control}
+                    name="workModel"
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="work-model" className="w-full">
+                          <SelectValue
+                            placeholder={"Select a salary work model..."}
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {WORK_MODEL_ITEMS.map((item) => (
+                            <SelectItem key={item.value} value={item.value}>
+                              {item.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => form.setValue("workModel", "")}
+                  >
+                    Clear
+                  </Button>
+                </div>
               </Field>
             </div>
           </div>
@@ -385,24 +403,37 @@ export function EditMode() {
                   </FieldError>
                 </div>
 
-                <Controller
-                  control={form.control}
-                  name="regime"
-                  render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger id="regime">
-                        <SelectValue placeholder={"Select a work regime..."} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {REGIME_ITEMS.map((item) => (
-                          <SelectItem key={item.value} value={item.value}>
-                            {item.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
+                <div className="flex w-full gap-2">
+                  <Controller
+                    control={form.control}
+                    name="regime"
+                    render={({ field }) => (
+                      <Select
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="regime" className="w-full">
+                          <SelectValue
+                            placeholder={"Select a work regime..."}
+                          />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {REGIME_ITEMS.map((item) => (
+                            <SelectItem key={item.value} value={item.value}>
+                              {item.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  <Button
+                    type="button"
+                    onClick={() => form.setValue("regime", "")}
+                  >
+                    Clear
+                  </Button>
+                </div>
               </Field>
             </div>
             <div className="w-1/2 flex flex-col gap-4">
@@ -425,6 +456,7 @@ export function EditMode() {
                       {date ? format(date, "PPP") : <span>Pick a date</span>}
                     </Button>
                   </PopoverTrigger>
+
                   <PopoverContent className="w-auto p-0">
                     <Calendar
                       mode="single"

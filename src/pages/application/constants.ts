@@ -2,7 +2,7 @@ export const APPLICATION_FORM_INITIAL_VALUES = {
   title: "",
   companyName: "",
   position: "",
-  salary: "",
+
   salaryType: "" as const,
   currency: "",
   workModel: "" as const,

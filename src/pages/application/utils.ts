@@ -20,8 +20,7 @@ export function normalizeApplicationFormData(
     title: data.title?.length
       ? data.title?.trim()
       : `${data.position} @ ${data.companyName}`,
-    salary:
-      parseFloat(data.salary?.trim().replace(",", ".") ?? "") || undefined,
+    salary: data.salary || undefined,
     description: data.description?.trim() || undefined,
     currency: data.currency?.trim() || undefined,
 
@@ -41,7 +40,7 @@ export function normalizeApplicationToForm(
     title: data.title ?? "",
     companyName: data.companyName ?? "",
     position: data.position ?? "",
-    salary: data.salary?.toString() ?? "",
+    salary: data.salary ?? undefined,
     salaryType: data.salaryType ?? "",
     currency: data.currency ?? "",
     workModel: data.workModel ?? "",
