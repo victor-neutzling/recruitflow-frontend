@@ -42,7 +42,7 @@ export function DeadlinePanel() {
 
   return (
     <Sheet>
-      <SheetTrigger className="absolute bottom-4 right-4" asChild>
+      <SheetTrigger className="sticky bottom-4 left-full mr-4" asChild>
         <Button size={"lg"}>
           Deadlines <Clock></Clock>
         </Button>
@@ -58,7 +58,7 @@ export function DeadlinePanel() {
             <div className="w-full flex justify-center p-6">
               <Spinner />
             </div>
-          ) : deadlinesQuery.data.count > 0 ? (
+          ) : deadlinesQuery.data!.count > 0 ? (
             deadlinesQuery.data?.deadlines.map((deadline) => (
               <div
                 className={`pl-4 pr-2  py-2 flex justify-between rounded-2xl border mx-2 ${getDeadlineStatus(deadline.date) === "today" ? "bg-accent/15" : "bg-surface"}`}
