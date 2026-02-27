@@ -14,10 +14,12 @@ import { getDeadlineStatus } from "@/utils/get-deadline-status";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { Clock, Trash } from "lucide-react";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export function DeadlinePanel() {
   const { getDeadlines, deleteDeadline } = useDeadlineRoutes();
+  const navigate = useNavigate();
 
   const deadlinesQuery = useQuery({
     queryKey: ["get-deadlines"],
@@ -46,7 +48,11 @@ export function DeadlinePanel() {
         </Button>
       </SheetTrigger>
       <SheetContent className="overflow-auto pb-2">
-        <SheetHeader className="mt-16">Deadlines</SheetHeader>
+        <SheetHeader className="mt-16 border-b">
+          <div className="flex gap-2 py-2 pl-2 items-center">
+            <Clock size={18}></Clock>Deadlines
+          </div>
+        </SheetHeader>
         <div className="w-full flex flex-col gap-2">
           {deadlinesQuery.isFetching ? (
             <div className="w-full flex justify-center p-6">
@@ -63,6 +69,7 @@ export function DeadlinePanel() {
                   >
                     {deadline.label}
                   </Typography>
+
                   <Typography
                     variant="muted"
                     className={`${getDeadlineStatus(deadline.date) === "expired" && "text-destructive"}`}
@@ -75,6 +82,23 @@ export function DeadlinePanel() {
                   >
                     status: {getDeadlineStatus(deadline.date)}
                   </Typography>
+                  <div className="flex gap-1 items-center">
+                    <Typography
+                      className={`${getDeadlineStatus(deadline.date) === "expired" && "text-destructive"}`}
+                      variant="muted"
+                    >
+                      parent -
+                    </Typography>
+                    <Button
+                      variant={"link"}
+                      className="p-0 m-0"
+                      onClick={() =>
+                        navigate(`/application/view/${deadline.applicationId}`)
+                      }
+                    >
+                      {deadline.applicationTitle}
+                    </Button>
+                  </div>
                 </div>
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -83,6 +107,7 @@ export function DeadlinePanel() {
                       variant={"ghost"}
                       size={"sm"}
                       type="button"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <Trash />
                     </Button>
