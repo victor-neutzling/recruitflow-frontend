@@ -72,16 +72,6 @@ export function ViewModeSkeleton() {
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-3/4" />
           </div>
-
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-2xl p-4">
-            <div className="flex justify-between items-center">
-              <Skeleton className="h-5 w-20" />
-              <Skeleton className="h-7 w-7 rounded-md" />
-            </div>
-            <div className="w-full border-b my-2" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-2/3" />
-          </div>
         </div>
       </div>
     </>
@@ -181,16 +171,6 @@ export function EditModeSkeleton() {
             <div className="w-full border-b my-2" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-3/4" />
-          </div>
-
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-2xl p-4">
-            <div className="flex justify-between items-center">
-              <Skeleton className="h-5 w-20" />
-              <Skeleton className="h-7 w-7 rounded-md" />
-            </div>
-            <div className="w-full border-b my-2" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-2/3" />
           </div>
         </div>
       </div>

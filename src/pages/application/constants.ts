@@ -13,7 +13,6 @@ export const APPLICATION_FORM_INITIAL_VALUES = {
 
 export const APPLICATION_LINK_FORM_INITIAL_VALUES = {
   label: "",
-  url: "",
 };
 
 export const CURRENCY_ITEMS = ["offered", "expected"];

@@ -1,7 +1,7 @@
 import { DraggableCard } from "../components/draggable-card";
 import { DragDropProvider } from "@dnd-kit/react";
 import { Column } from "../components/column";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { move } from "@dnd-kit/helpers";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useApplicationRoutes } from "@/api/application/useApplication";
@@ -16,6 +16,8 @@ import { Typography } from "@/components/typography";
 import BoardSkeleton from "../skeleton";
 import { Sidebar } from "@/widgets/sidebar";
 import { cleanFilters } from "@/utils/clean-filters";
+
+import { toast } from "sonner";
 
 export function DraggableBoard() {
   const { getApplications, moveApplications } = useApplicationRoutes();
@@ -34,6 +36,10 @@ export function DraggableBoard() {
     mutationFn: (data: MoveApplicationsPayload) => moveApplications(data),
   });
 
+  const hasActiveFilters = useMemo(() => {
+    return Object.keys(cleanFilters(filters)).length > 0;
+  }, [filters]);
+
   useEffect(() => {
     if (applicationsQuery.data)
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -47,15 +53,33 @@ export function DraggableBoard() {
       <Sidebar filters={filters} setFilters={setFilters} />
       <div className="flex flex-col gap-16 w-full items-center">
         <DragDropProvider
-          onDragOver={(event) => {
-            setApplications((applications) => move(applications, event));
-          }}
-          onDragEnd={(event) => {
-            setApplications((applications) => move(applications, event));
-            moveApplicationsMutation.mutate(
-              mapApplicationsToPayload(move(applications, event)),
-            );
-          }}
+          onDragStart={
+            hasActiveFilters
+              ? () => {
+                  toast(
+                    "Dragging is disabled while filters are applied. Changes won’t be saved.",
+                    { position: "top-right" },
+                  );
+                }
+              : undefined
+          }
+          onDragOver={
+            hasActiveFilters
+              ? undefined
+              : (event) => {
+                  setApplications((applications) => move(applications, event));
+                }
+          }
+          onDragEnd={
+            hasActiveFilters
+              ? undefined
+              : (event) => {
+                  setApplications((applications) => move(applications, event));
+                  moveApplicationsMutation.mutate(
+                    mapApplicationsToPayload(move(applications, event)),
+                  );
+                }
+          }
         >
           <div className="flex flex-row gap-4 w-full min-h-full pt-20 pb-4 bg-background justify-center">
             {Object.entries(applications).map(([column, applications]) => (

@@ -39,5 +39,10 @@ export const applicationLinkFormSchema = z.object({
   url: z.url("Invalid URL"),
 });
 
+export const deadlineFormSchema = z.object({
+  label: z.string().min(1, "label is required"),
+});
+
 export type ApplicationLinkFormData = z.infer<typeof applicationLinkFormSchema>;
 export type ApplicationFormData = z.infer<typeof applicationFormSchema>;
+export type deadlineFormData = z.infer<typeof deadlineFormSchema>;

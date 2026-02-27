@@ -100,6 +100,11 @@ export type GetApplicationByIdResponse = {
     label: string | null;
     url: string;
   }[];
+  deadlines: {
+    id: string;
+    label: string;
+    date: string;
+  }[];
 };
 
 export type GetApplicationsParams = {

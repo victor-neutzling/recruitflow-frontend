@@ -22,6 +22,7 @@ import { ListSkeleton } from "./skeleton";
 import { Searchbar } from "@/widgets/searchbar";
 import { Sidebar } from "@/widgets/sidebar";
 import { cleanFilters } from "@/utils/clean-filters";
+import { DeadlinePanel } from "@/widgets/deadline-panel/deadline-panel";
 
 export default function List() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function List() {
       <Dialog open={open} onOpenChange={setOpen}>
         <Navbar>
           <Searchbar />
-          <Button variant={"link"}>Statistics</Button>
+
           <Button variant={"link"} onClick={() => navigate("/board")}>
             Board
           </Button>
@@ -155,6 +156,7 @@ export default function List() {
           setOpen={(value: boolean) => setOpen(value)}
         />
       </Dialog>
+      <DeadlinePanel />
     </PageBase>
   );
 }

@@ -95,26 +95,26 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
       workModel: data.workModel ?? undefined,
       salaryMin: data.salaryMin ?? undefined,
       salaryMax: data.salaryMax ?? undefined,
-      appliedFrom: fromDate?.toISOString(),
-      appliedTo: toDate?.toISOString(),
+      appliedFrom: undefined,
+      appliedTo: undefined,
     });
   }
 
-  function handleSubmit(data: FilterFormData) {
+  function handleSubmit(data: FilterFormData, hasClearedDate?: boolean) {
     setFilters({
       regime: data.regime ?? undefined,
       workModel: data.workModel ?? undefined,
       salaryMin: data.salaryMin ?? undefined,
       salaryMax: data.salaryMax ?? undefined,
-      appliedFrom: fromDate?.toISOString(),
-      appliedTo: toDate?.toISOString(),
+      appliedFrom: hasClearedDate ? undefined : fromDate?.toISOString(),
+      appliedTo: hasClearedDate ? undefined : toDate?.toISOString(),
     });
   }
 
   return (
     <form
       className={`${isSidebarOpen ? "w-64" : "w-17.5"} border-l shadow-md flex flex-col items-center bg-surface/50 mr-2 mt-16 h-full!`}
-      onSubmit={form.handleSubmit(handleSubmit)}
+      onSubmit={form.handleSubmit((data) => handleSubmit(data))}
     >
       <div className="flex justify-between items-center px-4 h-16.5 border-b bg-surface  w-full">
         {isSidebarOpen && (
@@ -241,7 +241,7 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
                 id="applied-from"
                 variant="outline"
                 data-empty={!fromDate}
-                className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
+                className="data-[empty=true]:text-muted-foreground w-70 justify-start text-left font-normal"
               >
                 <CalendarIcon />
                 {fromDate ? format(fromDate, "PPP") : <span>Pick a date</span>}
@@ -266,7 +266,7 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
                 id="applied-to"
                 variant="outline"
                 data-empty={!toDate}
-                className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
+                className="data-[empty=true]:text-muted-foreground w-70 justify-start text-left font-normal"
               >
                 <CalendarIcon />
                 {toDate ? format(toDate, "PPP") : <span>Pick a date</span>}
@@ -320,7 +320,7 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
           onClick={() => {
             setToDate(undefined);
             setFromDate(undefined);
-            handleSubmit(form.getValues());
+            handleSubmit(form.getValues(), true);
           }}
         />
       </div>

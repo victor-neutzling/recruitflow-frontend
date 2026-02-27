@@ -13,7 +13,6 @@ import {
   CalendarIcon,
   Info,
   Pencil,
-  Plus,
   Send,
   Trash,
 } from "lucide-react";
@@ -59,6 +58,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { MoneyInput } from "@/components/ui/money-input";
+import { DeadlineList } from "./deadline-list";
 
 export function EditMode() {
   const { getApplicationById, deleteApplication, editApplication } =
@@ -136,9 +136,7 @@ export function EditMode() {
   return (
     <form
       className="flex flex-col items-center px-16 w-full"
-      onSubmit={form.handleSubmit(handleSubmit, (errors) => {
-        console.log(errors);
-      })}
+      onSubmit={form.handleSubmit(handleSubmit)}
     >
       <div className="pl-6 pr-2.5 mt-21 h-16 max-w-284 w-full bg-surface rounded-xl border shadow flex items-center justify-between">
         <Typography variant="muted">
@@ -450,7 +448,7 @@ export function EditMode() {
                       id="applied-at"
                       variant="outline"
                       data-empty={!date}
-                      className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
+                      className="data-[empty=true]:text-muted-foreground w-70 justify-start text-left font-normal"
                     >
                       <CalendarIcon />
                       {date ? format(date, "PPP") : <span>Pick a date</span>}
@@ -504,25 +502,10 @@ export function EditMode() {
         </div>
 
         <div className="mt-4 mb-8 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-xl">
-            <div className="flex pt-2 px-4 justify-between items-center">
-              <Typography className="font-bold">Deadlines</Typography>
-              <Button size="xs" variant="outline" type="button">
-                <Plus />
-              </Button>
-            </div>
-            <div className="w-full border-b" />
-          </div>
-
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-2xl">
-            <div className="flex pt-2 px-4 justify-between items-center">
-              <Typography className="font-bold">Activity</Typography>
-              <Button size="xs" variant="outline" type="button">
-                <Plus />
-              </Button>
-            </div>
-            <div className="w-full border-b" />
-          </div>
+          <DeadlineList
+            applicationId={applicationData!.id}
+            deadlines={applicationData!.deadlines}
+          />
         </div>
       </div>
     </form>

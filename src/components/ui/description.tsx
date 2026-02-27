@@ -24,7 +24,9 @@ export function Description({
   if (description.length <= limit) {
     return (
       <div className="w-full flex flex-col justify-center">
-        <Typography className="w-full">{description}</Typography>
+        <Typography className="w-full whitespace-pre-line">
+          {description}
+        </Typography>
       </div>
     );
   }
@@ -34,7 +36,9 @@ export function Description({
       <div className="w-full flex flex-col items-center">
         {isReadMoreEnabled ? (
           <>
-            <Typography className="text-sm">{description}</Typography>
+            <Typography className="text-sm whitespace-pre-line">
+              {description}
+            </Typography>
             <div className="w-full border-b mt-2" />
             <Button variant="link" onClick={() => setIsReadMoreEnabled(false)}>
               read less
@@ -42,7 +46,7 @@ export function Description({
           </>
         ) : (
           <>
-            <Typography className="text-sm">
+            <Typography className="text-sm whitespace-pre-line">
               {description.slice(0, limit) + "..."}
             </Typography>
             <div className="w-full border-b mt-2" />

@@ -18,7 +18,6 @@ export default function Application() {
     <PageBase>
       <Navbar>
         <Searchbar />
-        <Button variant={"link"}>Statistics</Button>
         <Button variant={"link"} onClick={() => navigate("/list")}>
           List View
         </Button>

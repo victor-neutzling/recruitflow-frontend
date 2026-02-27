@@ -11,11 +11,12 @@ import { mapWorkModelNames } from "@/utils/map-work-model-names";
 import { statusColorMap } from "@/utils/status-color-map";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Pencil, Plus, Rocket, Send, Trash } from "lucide-react";
+import { Pencil, Rocket, Send, Trash } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { LinksSection } from "./links-section";
 import { ViewModeSkeleton } from "../skeleton";
+import { DeadlineList } from "./deadline-list";
 
 export function ViewMode() {
   const { getApplicationById, deleteApplication, moveApplicationForward } =
@@ -171,24 +172,10 @@ export function ViewMode() {
           </div>
         </div>
         <div className="mt-4 mb-8 mr-16 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-xl">
-            <div className="flex pt-2 px-4 justify-between items-center">
-              <Typography className="font-bold">Deadlines</Typography>
-              <Button size={"xs"} variant={"outline"}>
-                <Plus />
-              </Button>
-            </div>
-            <div className="w-full border-b" />
-          </div>
-          <div className="flex flex-col gap-2 h-40 w-80 bg-surface border shadow rounded-2xl">
-            <div className="flex pt-2 px-4 justify-between items-center">
-              <Typography className="font-bold">Activity</Typography>
-              <Button size={"xs"} variant={"outline"}>
-                <Plus />
-              </Button>
-            </div>
-            <div className="w-full border-b" />
-          </div>
+          <DeadlineList
+            applicationId={applicationData!.id}
+            deadlines={applicationData!.deadlines}
+          />
         </div>
       </div>
     </>
