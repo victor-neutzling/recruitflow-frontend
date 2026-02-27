@@ -114,7 +114,7 @@ export function CreateDeadlineModal({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Create link</DialogTitle>
+        <DialogTitle>Create deadline</DialogTitle>
       </DialogHeader>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FieldGroup>
