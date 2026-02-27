@@ -42,7 +42,7 @@ export function DeadlinePanel() {
 
   return (
     <Sheet>
-      <SheetTrigger className="sticky bottom-4 left-full mr-4" asChild>
+      <SheetTrigger className="fixed bottom-4 right-4" asChild>
         <Button size={"lg"}>
           Deadlines <Clock></Clock>
         </Button>
