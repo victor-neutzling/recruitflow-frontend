@@ -58,7 +58,7 @@ export function DeadlinePanel() {
             <div className="w-full flex justify-center p-6">
               <Spinner />
             </div>
-          ) : (
+          ) : deadlinesQuery.data.count > 0 ? (
             deadlinesQuery.data?.deadlines.map((deadline) => (
               <div
                 className={`pl-4 pr-2  py-2 flex justify-between rounded-2xl border mx-2 ${getDeadlineStatus(deadline.date) === "today" ? "bg-accent/15" : "bg-surface"}`}
@@ -121,6 +121,16 @@ export function DeadlinePanel() {
                 </AlertDialog>
               </div>
             ))
+          ) : (
+            <div className="flex flex-col items-center p-4">
+              <Typography className="text-center">
+                You don’t have any deadlines yet.
+              </Typography>
+              <Typography className="text-center" variant="muted">
+                Select an application and click the + button in the deadlines
+                section to add one.
+              </Typography>
+            </div>
           )}
         </div>
       </SheetContent>
