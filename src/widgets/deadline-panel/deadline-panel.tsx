@@ -58,7 +58,7 @@ export function DeadlinePanel() {
             <div className="w-full flex justify-center p-6">
               <Spinner />
             </div>
-          ) : deadlinesQuery.data!.count > 0 ? (
+          ) : deadlinesQuery.data!.count ? (
             deadlinesQuery.data?.deadlines.map((deadline) => (
               <div
                 className={`pl-4 pr-2  py-2 flex justify-between rounded-2xl border mx-2 ${getDeadlineStatus(deadline.date) === "today" ? "bg-accent/15" : "bg-surface"}`}

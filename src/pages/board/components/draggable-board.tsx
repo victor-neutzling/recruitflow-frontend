@@ -49,7 +49,7 @@ export function DraggableBoard() {
   if (applicationsQuery.isFetching) return <BoardSkeleton />;
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex w-full h-full ">
       <Sidebar filters={filters} setFilters={setFilters} />
       <div className="flex flex-col gap-16 w-full items-center">
         <DragDropProvider
@@ -81,7 +81,7 @@ export function DraggableBoard() {
                 }
           }
         >
-          <div className="flex flex-row gap-4 w-full min-h-full pt-20 pb-4 bg-background justify-center">
+          <div className="flex flex-row gap-4 w-full pt-20 pb-4 bg-background justify-center">
             {Object.entries(applications).map(([column, applications]) => (
               <Column
                 key={column}
