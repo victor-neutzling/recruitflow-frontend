@@ -89,7 +89,12 @@ export function CreateApplicationLinkModal({
       <DialogHeader>
         <DialogTitle>Create link</DialogTitle>
       </DialogHeader>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form
+        onSubmit={(e) => {
+          e.stopPropagation(); // prevent parent form submit
+          form.handleSubmit(handleSubmit)(e);
+        }}
+      >
         <FieldGroup>
           <Field>
             <div className="flex gap-2">

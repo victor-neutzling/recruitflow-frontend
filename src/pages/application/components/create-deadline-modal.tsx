@@ -116,7 +116,12 @@ export function CreateDeadlineModal({
       <DialogHeader>
         <DialogTitle>Create deadline</DialogTitle>
       </DialogHeader>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form
+        onSubmit={(e) => {
+          e.stopPropagation();
+          form.handleSubmit(handleSubmit)(e);
+        }}
+      >
         <FieldGroup>
           <Field>
             <div className="flex w-full justify-between">

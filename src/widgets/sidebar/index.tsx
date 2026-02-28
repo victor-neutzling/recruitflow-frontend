@@ -113,7 +113,7 @@ export function Sidebar({ filters, setFilters }: SidebarProps) {
 
   return (
     <form
-      className={`${isSidebarOpen ? "w-64" : "w-17.5"} border-l shadow-md flex flex-col items-center bg-surface/50 mr-2 mt-16 h-full!`}
+      className={`${isSidebarOpen ? "w-64" : "w-17.5"} border-l shadow-md flex flex-col items-center bg-surface/50 mr-2 pt-16 h-full`}
       onSubmit={form.handleSubmit((data) => handleSubmit(data))}
     >
       <div className="flex justify-between items-center px-4 h-16.5 border-b bg-surface  w-full">

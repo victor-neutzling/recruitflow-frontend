@@ -18,7 +18,7 @@ export function ConfirmDeleteModal({
   customText = "Are you sure you want to delete this application?",
 }: ConfirmDeleteModalProps) {
   return (
-    <AlertDialogContent>
+    <AlertDialogContent onClick={(e) => e.stopPropagation()}>
       <AlertDialogHeader>
         <AlertDialogTitle>{customText}</AlertDialogTitle>
         <AlertDialogDescription>
