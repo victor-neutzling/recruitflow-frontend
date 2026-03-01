@@ -5,6 +5,8 @@ import { createBrowserRouter } from "react-router";
 const Home = lazy(() => import("./pages/home"));
 const Error = lazy(() => import("./pages/error"));
 
+const PostAuth = lazy(() => import("./pages/postauth"));
+
 const Board = lazy(() => import("./pages/board"));
 const List = lazy(() => import("./pages/list"));
 
@@ -29,6 +31,10 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/postauth",
+    element: <PostAuth />,
   },
   {
     path: "/board",
