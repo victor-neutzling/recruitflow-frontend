@@ -91,7 +91,7 @@ export function CreateApplicationLinkModal({
       </DialogHeader>
       <form
         onSubmit={(e) => {
-          e.stopPropagation(); // prevent parent form submit
+          e.stopPropagation();
           form.handleSubmit(handleSubmit)(e);
         }}
       >
