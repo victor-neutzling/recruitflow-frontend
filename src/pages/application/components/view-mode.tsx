@@ -5,18 +5,19 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ConfirmDeleteModal } from "@/components/ui/confirm-delete-modal";
 import { Description } from "@/components/ui/description";
-import { Input } from "@/components/ui/input";
+
 import { mapStatusNames } from "@/utils/map-status-names";
 import { mapWorkModelNames } from "@/utils/map-work-model-names";
 import { statusColorMap } from "@/utils/status-color-map";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { Pencil, Rocket, Send, Trash } from "lucide-react";
+import { Pencil, Rocket, Trash } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { LinksSection } from "./links-section";
 import { ViewModeSkeleton } from "../skeleton";
 import { DeadlineList } from "./deadline-list";
+import { NotesSection } from "./notes-section";
 
 export function ViewMode() {
   const { getApplicationById, deleteApplication, moveApplicationForward } =
@@ -157,19 +158,8 @@ export function ViewMode() {
               limit={200}
             />
           </div>
-          <LinksSection links={applicationData!.applicationLinks} />
-          <div className="flex flex-col gap-4">
-            <Typography variant="p" className="font-bold text-xl">
-              Notes
-            </Typography>
-            placeholder!!
-            <div className="flex w-full gap-2">
-              <Input className="w-full" />
-              <Button className="text-surface w-16">
-                <Send />
-              </Button>
-            </div>
-          </div>
+          <LinksSection links={applicationData?.applicationLinks ?? []} />
+          <NotesSection notes={applicationData?.notes ?? []} />
         </div>
         <div className="mt-4 mb-8 mr-16 flex flex-col gap-4">
           <DeadlineList

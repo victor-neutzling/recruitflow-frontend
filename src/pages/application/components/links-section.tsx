@@ -50,7 +50,7 @@ export function LinksSection({ links }: LinksSectionProps) {
       ) : (
         <div className="w-full py-2 flex justify-center">
           <Typography variant="muted">
-            there are no links registered on this application
+            there are no links registered on this application.
           </Typography>
         </div>
       )}

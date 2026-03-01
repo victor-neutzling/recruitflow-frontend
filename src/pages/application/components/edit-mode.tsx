@@ -8,14 +8,7 @@ import {
 } from "../constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Typography } from "@/components/typography";
-import {
-  BookOpen,
-  CalendarIcon,
-  Info,
-  Pencil,
-  Send,
-  Trash,
-} from "lucide-react";
+import { BookOpen, CalendarIcon, Info, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -59,6 +52,7 @@ import {
 } from "@/components/ui/tooltip";
 import { MoneyInput } from "@/components/ui/money-input";
 import { DeadlineList } from "./deadline-list";
+import { NotesSection } from "./notes-section";
 
 export function EditMode() {
   const { getApplicationById, deleteApplication, editApplication } =
@@ -486,19 +480,7 @@ export function EditMode() {
           </div>
 
           <LinksSection links={applicationData?.applicationLinks} />
-
-          <div className="flex flex-col gap-4">
-            <Typography variant="p" className="font-bold text-xl">
-              Notes
-            </Typography>
-
-            <div className="flex w-full gap-2">
-              <Input className="w-full" placeholder="Add a note..." />
-              <Button className="text-surface w-16">
-                <Send />
-              </Button>
-            </div>
-          </div>
+          <NotesSection notes={applicationData?.notes ?? []} />
         </div>
 
         <div className="mt-4 mb-8 flex flex-col gap-4">

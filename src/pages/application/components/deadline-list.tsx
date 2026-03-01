@@ -71,7 +71,7 @@ export function DeadlineList({ applicationId, deadlines }: DeadlineListProps) {
                 variant="muted"
                 className={`${getDeadlineStatus(deadline.date) === "expired" && "text-destructive"}`}
               >
-                {format(deadline.date, "MM/dd/yyyy - hh:mm")}
+                {format(deadline.date, "MM/dd/yyyy - hh:mm a")}
               </Typography>
               <Typography
                 variant="muted"

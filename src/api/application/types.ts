@@ -105,6 +105,11 @@ export type GetApplicationByIdResponse = {
     label: string;
     date: string;
   }[];
+  notes: {
+    id: string;
+    text: string;
+    date: string;
+  }[];
 };
 
 export type GetApplicationsParams = {
