@@ -58,8 +58,8 @@ export default function List() {
         ) : (
           <div className="h-full w-full flex">
             <Sidebar filters={filters} setFilters={setFilters} />
-            <div className="h-full w-full mt-16 flex justify-center">
-              <div className="max-w-350 w-full h-full p-4 mx-16 gap-4 flex flex-col bg-surface shadow-md">
+            <div className="h-full w-full flex justify-center">
+              <div className="max-w-350 w-full h-full p-4 mx-16 pt-20 gap-4 flex flex-col bg-surface shadow-md">
                 {applicationsQuery &&
                   Object.entries(
                     applicationsQuery.data?.applications ?? {},
